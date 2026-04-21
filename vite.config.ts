@@ -19,15 +19,18 @@ export default defineConfig({
     },
   },
   server: {
-    host: '0.0.0.0', // Required for Docker containers
-    port: 5173,
-    proxy: {
-      '/api': {
-        target: 'http://localhost:3000',
-        changeOrigin: true,
-      },
+  host: '0.0.0.0',
+  port: 5173,
+  watch: {
+    usePolling: true,   // 🔥 REQUIRED for Docker
+  },
+  proxy: {
+    '/api': {
+      target: 'http://localhost:3000',
+      changeOrigin: true,
     },
   },
+},
   // Vitest configuration
   test: {
     globals: true,
